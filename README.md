@@ -1,1 +1,1 @@
-# yizelive
+Build docker image for RTMP service
