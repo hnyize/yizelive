@@ -63,6 +63,7 @@ RUN rm /opt/nginx/conf/nginx.conf
 ADD run.sh /
 ADD live /opt/
 VOLUME /video
+RUN chmod +x /run.sh
 
 EXPOSE 1935
 EXPOSE 8080
