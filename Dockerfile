@@ -1,4 +1,4 @@
-FROM alpine:latest as builder
+FROM hnyize/alpinegcc:latest as builder
 MAINTAINER hnyize <hainanyize@qq.com>
 
 ARG NGINX_VERSION=1.15.5
