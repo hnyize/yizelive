@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link href="js/video-js.min.css" rel="stylesheet">
+    <meta http-equiv=”Content-Type” content=”text/html; charset=utf-8″>
+    <script src="js/jquery-3.3.1.min.js"></script>
+    <link href="js/yize.css" rel="stylesheet" />
+    <script src="js/video.min.js"></script>
+    <script src="js/qrcode.min.js"></script>
+    <title>一泽科技视频直播</title>
+    <style type="text/css">
+        .yize {
+            text-align:center;
+            position:absolute;
+            top:0px;
+            left:0px;
+            width:100%;
+            height:100%;
+        }
+        .video {
+            margin-left:50%;
+            transform:translate(-50%,0);
+            position:absolute;
+        }
+        img{
+            margin:auto;
+        }
+    </style>
+    <script>
+        function getQueryString(name) {
+
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) return unescape(r[2]); return null;
+        }
+        $(document).ready(function () {
+            var qrcode = new QRCode("qrcode", {
+                text: window.location.href,
+                width: 150,
+                height: 150,
+                colorDark: "#000000",
+                colorLight: "#ffffff",
+            });
+            qrcode.makeImage();
+            var host = window.location.host;
+            var zbm = getQueryString('zbm');
+            var vsrc = "http://" + host + "/hls/" + zbm + ".m3u8";
+            var vp = videojs.getPlayer("yize-live");
+            vp.src(vsrc);
+            vp.play();
+        });
+        function downloadQRcode () {
+            var img = $('#qrcode img')[0];
+            var canvas = document.createElement('canvas');
+            canvas.width = img.width;
+            canvas.height = img.height;
+            canvas.getContext('2d').drawImage(img, 0, 0);
+            url = canvas.toDataURL("image/jpg");
+            var savelink = document.getElementById("downloadLink");
+            $("#downloadLink").attr("href", url);
+            $("#downloadLink").attr("download", "直播二维码.jpg");
+            savelink.click();
+        }
+    </script>
+</head>
+<body>
+
+<div id="main" class="yize">
+    直播二维码
+    <div id="qrcode" style="margin:auto;"></div>
+    <input id="downloadqr" type="button" value="下载二维码" onclick="downloadQRcode();" style="visibility:hidden;" /><br />
+    <font color="red">（微信无法观看时请点击右上角使用浏览器打开）</font>
+    <a id="downloadLink" download="直播二维码.jpg" href=""></a>
+    <br /><br />
+    <div class="video">
+        <video id="yize-live" class="video-js vjs-default-skin vjs-big-play-centered" controls preload="auto" poster="img/logo.png" data-setup="" width="640">
+            <source src="" type="application/x-mpegURL">
+            <p class="vjs-no-js">To view this video please enable JavaScript, and consider upgrading to a web browser that <a href="http://videojs.com/html5-video-support/" target="_blank">supports HTML5 video</a></p>
+        </video>
+    </div>    
+</div>
+    <div id="footer">技术支持：<a href="http://www.hnyize.com">一泽科技</a></div>
+</body>
+</html>

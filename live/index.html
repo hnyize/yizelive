@@ -1,0 +1,75 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title>一泽科技视频直播</title>
+    <link href="js/yize.css" rel="stylesheet" />
+    <script src="js/jquery-3.3.1.min.js"></script>
+    <script src="js/qrcode.min.js"></script>
+	<meta charset="utf-8" />
+    <style>
+        #main{
+            margin:auto;
+            padding-top:20px;
+        }
+        #maintable{
+            width:500px;
+            margin:auto;
+            text-align:center;
+        }
+        input[type=text]{
+            width:100%;
+        }
+    </style>
+    <script>
+        function gotolive() {
+            var zbm = document.getElementById("zbm").value;            
+            var hostpath = window.location.href;
+            hostpath = hostpath.substring(0, hostpath.lastIndexOf("/"));
+            var url = hostpath + "/live.html?zbm=" + zbm;
+            this.window.location.href = url;
+        }
+        function getQRcode() {
+            document.getElementById("qrcode").innerText = "";            
+            var codeaddr = document.getElementById("codeaddress").value;
+            if (codeaddr != "") {
+                var code = new QRCode("qrcode", {
+                    text: codeaddr,
+                    width: 150,
+                    height: 150,
+                    colorDark: "#000000",
+                    colorLight: "#ffffff",
+                });
+                code.makeImage();
+            }
+            else
+            {
+                alert("请输入您要转换的内容！");
+                $("#codeaddress").focus();
+            }
+        }
+    </script>
+</head>
+<body>
+    <div id="main">
+        <table id="maintable">
+            <tr>
+                <td>
+                输入直播码：<input id="zbm" type="text" value="" /><input id="gotobt" type="button" value="观看直播" onclick="gotolive();"/>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                输入需要转换成二维码的内容：<input id="codeaddress" type="text" /><input id="getqrcode" type="button" value="转换二维码" onclick="getQRcode()"/>
+                </td>
+            </tr>
+            <tr>
+                <td align="center">
+                    <div id="qrcode"></div>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div id="footer">技术支持：<a href="http://www.hnyize.com">一泽科技</a></div>
+</body>
+</html>

@@ -1,0 +1,9 @@
+﻿body,html {
+}
+#footer {
+    position:fixed;
+    bottom:0px;
+    text-align:center;
+    margin:auto;
+    width:100%;
+}
