@@ -139,11 +139,7 @@ cat >>${NGINX_CONFIG_FILE} <<!EOF
 !EOF
 }
 
-if ! [ -f ${NGINX_CONFIG_FILE} ]; then
-    apply_config
-else
-    echo "CONFIG EXISTS - Not creating!"
-fi
+apply_config
 echo "Changing record folder /video permission..."
 chmod 777 /video
 echo "Starting server..."
