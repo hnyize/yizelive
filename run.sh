@@ -117,7 +117,7 @@ cat >>${NGINX_CONFIG_FILE} <<!EOF
             record_path /video;
             record_unique on;
 !EOF
-    REC="false"
+
 fi
     if [ "$PUSH" = "true" ]; then
         for PUSH_URL in $(echo ${YIZE_PTDZ}); do
