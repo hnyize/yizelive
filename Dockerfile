@@ -19,6 +19,9 @@ RUN	cd /tmp										&&	\
 	make install
 
 FROM alpine:latest
+RUN	echo '' > /etc/apk/repositories &&	\
+	echo 'http://mirrors.aliyun.com/alpine/v3.8/main/' > /etc/apk/repositories  && \
+	echo 'http://mirrors.aliyun.com/alpine/v3.8/community/' >> /etc/apk/repositories
 RUN apk update		&& \
 	apk add			   \
 		openssl		   \
