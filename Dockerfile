@@ -1,7 +1,7 @@
 FROM hnyize/alpinebuilder:latest as builder
 MAINTAINER hnyize <hainanyize@qq.com>
 
-ARG NGINX_VERSION=1.15.5
+ARG NGINX_VERSION=1.15.8
 ARG NGINX_RTMP_VERSION=1.2.1
 
 RUN	cd /tmp/									&&	\
